@@ -65,11 +65,6 @@ async fn main() -> anyhow::Result<()> {
     let settings = settings.build()?;
     let bao = VaultClient::new(settings)?;
 
-    let hostname = "";
-    let namespace = "";
-    let cluster_domain = "";
-    let _common_name = format!("{}.{}.svc.{}", hostname, namespace, cluster_domain);
-
     // limit the controller to running a maximum of two concurrent reconciliations
     let config = Config::default().concurrency(2);
 
