@@ -1,20 +1,13 @@
-use std::{env, error::Error as StdError, io::BufRead, sync::Arc, time::Duration};
+use std::{env, io::BufRead, sync::Arc, time::Duration};
 
 use anyhow::Context;
-use chrono::Utc;
-use der::EncodePem;
 use futures::StreamExt;
-use k8s_openapi::{
-    api::certificates::v1alpha1::PodCertificateRequest,
-    apimachinery::pkg::apis::meta::v1::{Condition, Time},
-    serde_json::json,
-};
+use k8s_openapi::api::certificates::v1alpha1::PodCertificateRequest;
 use kube::{
     Api, Client,
-    api::{Patch, PatchParams},
     runtime::{Config, Controller, controller::Action, watcher},
 };
-use tracing::{debug, info, warn};
+use tracing::{info, warn};
 use vaultrs::client::{VaultClient, VaultClientSettingsBuilder};
 
 use crate::{controller::Data, error::Error, intermediate_ca::IntermediateCA};
