@@ -1,0 +1,32 @@
+[package]
+name = "openbao-pki-controller"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+kube = { version = "2.0.1", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.26.0", features = ["latest", "schemars"] }
+schemars = { version = "1" }
+tokio = { version = "1", features = ["full"] }
+vaultrs = "0.7.4"
+tracing-subscriber = "0.3.22"
+tracing = { version = "0.1.43", features = ["log"] }
+anyhow = "1.0.100"
+futures = "0.3.31"
+thiserror = "2.0.17"
+chrono = "0.4.42"
+der = { version = "0.7", features = ["derive", "alloc"] }
+pem = "3.0"
+spki = "0.7"
+x509-cert = { version = "0.2", features = ["arbitrary", "builder"] }
+const-oid = { version = "0.9", features = ["db"] }
+rcgen = "0.14.5"
+signature = "2.2.0"
+rsa = { version = "0.9.9", features = ["sha2"] }
+base64 = "0.22.1"
+rand = "0.8"
+pkcs8 = { version = "0.10", features = ["encryption", "pem"] }
+ecdsa = { version = "0.16", features = ["signing", "pem"] }
+p256 = "0.13"
+gethostname = "1.1.0"
+# cert-helper = "0.4.0"
