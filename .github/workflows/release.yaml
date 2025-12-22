@@ -1,21 +1,19 @@
 on:
-  pull_request:
-    branches: [ main ]
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
-  tests:
+  release:
     runs-on: ubuntu-latest
-    steps:    
+    steps:
       - uses: actions/checkout@v5
       - uses: cachix/install-nix-action@v31
       - uses: cachix/cachix-action@v14
         with:
           name: devenv
 
-      - name: run tests
-        run: nix flake check
-      - name: build
+      - name: Build container image
         run: nix build
+      - name: Publish container image
+        run: nix run .#push-container
+
