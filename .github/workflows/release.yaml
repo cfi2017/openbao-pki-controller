@@ -2,8 +2,26 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:    
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v14
+        with:
+          name: devenv
+
+      - name: run tests
+        run: nix flake check
+      - name: build
+        run: nix build
   release:
+    needs: [ "tests" ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -14,6 +32,8 @@ jobs:
 
       - name: Build container image
         run: nix build
+      - name: Registry Login
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | nix run .#registry-login
       - name: Publish container image
         run: nix run .#push-container
 

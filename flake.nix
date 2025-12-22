@@ -137,6 +137,16 @@
               '');
             };
 
+            registry-login = {
+              type = "app";
+              program = pkgs.writeShellScript "registry-login" ''
+                exec ${pkgs.skopeo}/bin/skopeo login \
+                  ghcr.io \
+                  --username "$REGISTRY_USER" \
+                  --password-stdin
+              '';
+            };
+
             push-container = {
               type = "app";
               program = toString (pkgs.writeShellScript "push-container" ''
