@@ -82,7 +82,7 @@
               buildPhase = ''
                 cargo test --no-fail-fast
               '';
-              installPhase = ''echo $out > .tmp'';
+              installPhase = ''touch $out'';
             };
 
             container-build = pkgs.dockerTools.buildLayeredImage {
