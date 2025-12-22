@@ -139,12 +139,12 @@
 
             registry-login = {
               type = "app";
-              program = pkgs.writeShellScript "registry-login" ''
+              program = toString (pkgs.writeShellScript "registry-login" ''
                 exec ${pkgs.skopeo}/bin/skopeo login \
                   ghcr.io \
                   --username "$REGISTRY_USER" \
                   --password-stdin
-              '';
+              '');
             };
 
             push-container = {
