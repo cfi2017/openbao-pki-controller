@@ -138,11 +138,11 @@
 
             push-container = {
               type = "app";
-              program = pkgs.writeShellScript "push-container" ''
+              program = toString (pkgs.writeShellScript "push-container" ''
                 set -euo pipefail
                 IMAGE_TAR=$(nix build --no-link --print-out-paths .#container)
                 skopeo copy docker-archive:$IMAGE_TAR docker://ghcr.io/cfi2017/openbao-pki-controller:${self.shortRev or "latest"}
-              '';
+              '');
             };
           };
         }
