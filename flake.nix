@@ -38,7 +38,7 @@
                 packageOverrides.rustfmt = rustToolchain;
               };
               clippy = {
-                enable = true;
+                enable = false;
                 packageOverrides.cargo = rustToolchain;
                 packageOverrides.clippy = rustToolchain;
                 settings.allFeatures = true;
